@@ -13,31 +13,42 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Map;
 
+// Service layer responsible for exporting event attendance data
 @Service
 @RequiredArgsConstructor
 public class ExportEventService {
 
     private final ExportEventRepository repo;
 
-    // SINGLE CSV export (OneBillion_Rising format)
-    public ResponseEntity<?> export(Integer eventId) throws Exception {
+    // Exports attendance data as CSV (single event) or ZIP (all events)
+    public ResponseEntity<?> export(Integer eventId, boolean exportAll) throws Exception {
 
-        if (eventId == null) {
-            return ResponseEntity.badRequest().body("Event ID is required");
+        // Fetch events
+        List<Map<String, Object>> events =
+                exportAll ? repo.findAllEvents() : repo.findSingleEvent(eventId);
+
+        if (events.isEmpty()) {
+            return ResponseEntity.badRequest().body("No events found.");
         }
 
-        List<Map<String, Object>> data =
-                repo.exportSingleCsv(eventId);
+        // EXPORT ALL → ZIP
+        if (exportAll) {
+            byte[] zip = CsvZipUtil.buildZip(events, repo);
 
-        if (data.isEmpty()) {
-            return ResponseEntity.badRequest().body("No data found.");
+            return ResponseEntity.ok()
+                    .header(HttpHeaders.CONTENT_DISPOSITION,
+                            "attachment; filename=All_Events_" + System.currentTimeMillis() + ".zip")
+                    .contentType(MediaType.APPLICATION_OCTET_STREAM)
+                    .body(zip);
         }
 
-        byte[] csv = CsvZipUtil.createCsv(data);
+        // EXPORT ONE → CSV
+        byte[] csv = CsvZipUtil.buildCsv(events.get(0), repo);
+        String name = CsvZipUtil.fileName(events.get(0));
 
         return ResponseEntity.ok()
                 .header(HttpHeaders.CONTENT_DISPOSITION,
-                        "attachment; filename=OneBillion_Rising.csv")
+                        "attachment; filename=" + name)
                 .contentType(MediaType.TEXT_PLAIN)
                 .body(csv);
     }
