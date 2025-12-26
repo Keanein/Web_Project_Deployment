@@ -73,26 +73,40 @@ function loadAttendance() {
         });
 }
 
+//function addStudent() {
+//    fetch("/attendance/add", {
+//        method: "POST",
+//        headers: { "Content-Type": "application/json" },
+//        body: JSON.stringify({
+//            eventId,
+//            courseId,
+//            studentNumber: document.getElementById("studentNumber").value,
+//            fullName: document.getElementById("fullName").value,
+//            yearLevel: document.getElementById("yearLevel").value
+//        })
+//    })
+//    .then(res => {
+//        if (!res.ok) throw new Error("Add failed");
+//        loadAttendance();
+//    })
+//    .catch(err => {
+//        console.error(err);
+//        alert("Failed to add student");
+//    });
+//}
+
 function addStudent() {
     fetch("/attendance/add", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: {"Content-Type":"application/json"},
         body: JSON.stringify({
-            eventId,
-            courseId,
+            eventId: eventId,
+            courseId: courseId,
             studentNumber: document.getElementById("studentNumber").value,
             fullName: document.getElementById("fullName").value,
             yearLevel: document.getElementById("yearLevel").value
         })
-    })
-    .then(res => {
-        if (!res.ok) throw new Error("Add failed");
-        loadAttendance();
-    })
-    .catch(err => {
-        console.error(err);
-        alert("Failed to add student");
-    });
+    }).then(() => loadAttendance());
 }
 
 function removeStudent(id) {

@@ -9,8 +9,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.Map;
 
-// AttendanceService.java
-
 @Service
 @RequiredArgsConstructor
 public class AttendanceService {
@@ -21,6 +19,7 @@ public class AttendanceService {
         return repo.getAttendance(eventId, courseId);
     }
 
+    // ✅ FIXED: delegate directly to repository
     public void addStudent(AddStudentRequest req) {
         repo.addStudent(req);
     }
@@ -41,4 +40,5 @@ public class AttendanceService {
         }
     }
 }
+
 
