@@ -12,20 +12,27 @@ the page.
 
 
 
+// attendance.js
+
 const params = new URLSearchParams(window.location.search);
 const eventId  = params.get("event_id");
 const courseId = params.get("course_id");
+
+if (!eventId || !courseId) {
+    alert("Missing event or course ID");
+}
 
 loadAttendance();
 
 function loadAttendance() {
     fetch(`/attendance?event_id=${eventId}&course_id=${courseId}`)
-        .then(res => res.json())
+        .then(res => {
+            if (!res.ok) throw new Error("Failed to load attendance");
+            return res.json();
+        })
         .then(data => {
 
             document.getElementById("eventName").innerText = data.event_name;
-            const courseNameEl = document.getElementById("courseName");
-            if (courseNameEl) courseNameEl.innerText = "";
 
             const body = document.getElementById("attendanceBody");
             body.innerHTML = "";
@@ -59,29 +66,41 @@ function loadAttendance() {
                     </td>
                 </tr>`;
             });
+        })
+        .catch(err => {
+            console.error(err);
+            alert("Error loading attendance");
         });
 }
 
 function addStudent() {
     fetch("/attendance/add", {
         method: "POST",
-        headers: {"Content-Type":"application/json"},
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-            eventId: eventId,
-            courseId: courseId, // ✅ REQUIRED
+            eventId,
+            courseId,
             studentNumber: document.getElementById("studentNumber").value,
             fullName: document.getElementById("fullName").value,
             yearLevel: document.getElementById("yearLevel").value
         })
-    }).then(() => loadAttendance());
+    })
+    .then(res => {
+        if (!res.ok) throw new Error("Add failed");
+        loadAttendance();
+    })
+    .catch(err => {
+        console.error(err);
+        alert("Failed to add student");
+    });
 }
 
 function removeStudent(id) {
     fetch("/attendance/delete", {
         method: "POST",
-        headers: {"Content-Type":"application/json"},
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-            eventId: eventId,
+            eventId,
             studentId: id
         })
     }).then(() => loadAttendance());
@@ -90,7 +109,7 @@ function removeStudent(id) {
 function saveName(id) {
     fetch("/attendance/edit-name", {
         method: "POST",
-        headers: {"Content-Type":"application/json"},
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
             studentId: id,
             fullName: document.getElementById(`name-${id}`).value
@@ -101,12 +120,12 @@ function saveName(id) {
 function saveStatus(studentId, period, status) {
     fetch("/attendance/update-status", {
         method: "POST",
-        headers: {"Content-Type":"application/json"},
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-            eventId: eventId,
-            studentId: studentId,
-            period: period,
-            status: status
+            eventId,
+            studentId,
+            period,
+            status
         })
     });
 }
