@@ -1,0 +1,90 @@
+<!-- Grefiel, Micheree Kian M. -->
+
+<!-- This page shows a list of courses for a specific event. On the left side, it displays the logos of the organizations.
+The main area shows the event’s name, date, time, and location. Below that, it lists all the courses for the event as clickable buttons.
+If there are no courses, it shows a message saying "No courses found." Clicking a course button takes you to the attendance page for that course.
+There is also a "Back" button to go back to the event dashboard. The page uses PHP to fill in the event and course information safely
+and CSS to make it look nice. -->
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>CoursePage</title>
+
+    <!-- CSS path -->
+    <link rel="stylesheet" href="/style.css">
+</head>
+
+<body class="course-choices-page">
+
+<div class="container">
+
+    <!-- LEFT SIDE LOGOS -->
+    <div class="left-panel">
+        <img src="/pictures/cs-logo.png" alt="cs-logo" />
+        <img src="/pictures/uep-logo.png" alt="uep-logo" />
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div class="main-content">
+
+        <!-- Event Details -->
+        <div class="event-details-box">
+            <h1 id="eventName"></h1>
+
+            <div class="event-details">
+                <strong>Date:</strong> <span id="eventDate"></span><br>
+                <strong>Time:</strong> <span id="eventTime"></span><br>
+                <strong>Location:</strong> <span id="eventLocation"></span>
+            </div>
+        </div>
+
+        <div class="menu" id="courseList">
+            <!-- courses injected here -->
+        </div>
+
+        <div style="margin-top:18px;">
+            <a class="btn-orange" href="/EventDash.html">Back</a>
+        </div>
+
+    </div>
+</div>
+
+<script>
+    const params = new URLSearchParams(window.location.search);
+    const eventId = params.get("event_id");
+
+    /* LOAD EVENT + COURSES */
+    fetch(`/courses?event_id=${eventId}`)
+        .then(res => res.json())
+        .then(data => {
+
+            const ev = data.event;
+            document.getElementById("eventName").innerText = ev.event_name;
+            document.getElementById("eventDate").innerText = ev.event_date || "Not set";
+            document.getElementById("eventTime").innerText = ev.event_time || "Not set";
+            document.getElementById("eventLocation").innerText = ev.location || "Not set";
+
+            const list = document.getElementById("courseList");
+
+            if (data.courses.length === 0) {
+                list.innerHTML = `<p style="color:gray;">No courses found.</p>`;
+                return;
+            }
+
+            data.courses.forEach(c => {
+                list.innerHTML += `
+            <a class="course-btn"
+               href="/Attendance.html?event_id=${eventId}&course_id=${c.course_id}">
+               ${c.course_name}
+            </a>
+        `;
+            });
+        });
+</script>
+
+</body>
+</html>
+

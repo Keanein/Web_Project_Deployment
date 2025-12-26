@@ -1,0 +1,1964 @@
+/* Bantayan, Jatomie Jonalyn C. */
+
+/*
+This CSS file styles all pages of the attendance system. Each page (attendance,
+dashboard, login, course choices, create event, delete event, and admin pages)
+is scoped using a unique class name so the styles do not affect other pages.
+The layout is mostly the same across pages: a blue left panel for logos and
+navigation, and a main content area on the right for forms, tables, and buttons.
+It also styles tables, input fields, buttons, and hover effects to make the
+interface clean and easy to use. Extra fixes are included to make sure event
+lists and buttons can be clicked properly, and to control layering using
+z-index. Overall, this file keeps the design consistent, organized, and
+user-friendly across the whole system.
+*/
+
+ /* ================================================================
+   ATTENDANCE 1 PAGE — BS IT (SCOPED)
+   ================================================================ */
+
+ /* FIX EVENT CLICK BLOCKING */
+ .event-box,
+ .event-box * {
+     pointer-events: auto;
+ }
+
+ .main {
+     pointer-events: auto;
+     position: relative;
+     z-index: 10;
+ }
+
+ #eventList li {
+     cursor: pointer;
+     pointer-events: auto;
+     z-index: 20;
+     position: relative;
+ }
+
+.attendance1-page {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #c8c8ce;
+}
+
+/* MAIN LAYOUT */
+.attendance1-page .container {
+    display: flex;
+    height: 100vh;
+}
+
+/* LEFT PANEL */
+.attendance1-page .left-panel {
+    width: 15.1%;
+    background-color: #234b9b;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 5px;
+    padding-top: 20px;
+}
+
+.attendance1-page .left-panel img {
+    width: 150px;
+    height: auto;
+}
+
+/* RIGHT CONTENT */
+.attendance1-page .right-content {
+    width: 78%;
+    padding: 40px 50px;
+}
+
+/* TOP BAR */
+.attendance1-page .top-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.attendance1-page .titles h1 {
+    margin: 0;
+    font-style: italic;
+    font-size: 35px;
+    margin-bottom: 30px;
+    font-family: 'Segoe UI', Tahoma, Verdana, sans-serif;
+}
+
+.attendance1-page .titles h2 {
+    margin: 5px 0 25px 0;
+    font-size: 26px;
+}
+
+/* GO BACK BUTTON */
+.attendance1-page .go-back {
+    background-color: #f7a533;
+    border: none;
+    padding: 12px 22px;
+    border-radius: 20px;
+    font-size: 17px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 30px;
+    transition: 0.2s;
+}
+
+.attendance1-page .go-back:hover {
+    background-color: #f7b45b;
+    transform: scale(1.08);
+}
+
+/* OUTER BOX */
+.attendance1-page .box {
+    margin-top: 5px;
+    border: 2px solid #555;
+    padding: 25px;
+    border-radius: 14px;
+}
+
+/* INPUT ROW */
+.attendance1-page .input-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 18px;
+    margin-bottom: 20px;
+}
+
+.attendance1-page .input-row input {
+    width: 32%;
+    padding: 6px;
+    border: 1px solid #999;
+    border-radius: 4px;
+    outline: none;
+}
+
+.attendance1-page .ylab {
+    margin-left: 145px;
+}
+
+/* BUTTON ROW */
+.attendance1-page .button-row {
+    display: flex;
+    justify-content: left;
+    gap: 25px;
+    margin-bottom: 20px;
+}
+
+.attendance1-page .btn {
+    background: #f7a533;
+    border: none;
+    padding: 12px 32px;
+    border-radius: 22px;
+    font-size: 17px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.attendance1-page .btn:hover {
+    background-color: #f7b45b;
+    transform: scale(1.08);
+}
+
+/* TABLE */
+.attendance1-page table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 17px;
+}
+
+.attendance1-page table th,
+.attendance1-page table td {
+    border: 1px solid #666;
+    padding: 12px;
+}
+
+.attendance1-page table th {
+    background: #f1f1f1;
+}
+
+.attendance1-page td:nth-child(3),
+.attendance1-page td:nth-child(4) {
+    text-align: center;
+    font-size: 19px;
+}
+
+ /* ================================================================
+   ATTENDANCE 2 PAGE — BS BIO (SCOPED)
+   ================================================================ */
+
+.attendance2-page {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #c8c8ce;
+}
+
+/* MAIN LAYOUT */
+.attendance2-page .container {
+    display: flex;
+    height: 100vh;
+}
+
+/* LEFT PANEL */
+.attendance2-page .left-panel {
+    width: 15.1%;
+    background-color: #234b9b;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 5px;
+    padding-top: 20px;
+}
+
+.attendance2-page .left-panel img {
+    width: 150px;
+    height: auto;
+}
+
+/* RIGHT CONTENT */
+.attendance2-page .right-content {
+    width: 78%;
+    padding: 40px 50px;
+}
+
+/* TOP BAR */
+.attendance2-page .top-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.attendance2-page .titles h1 {
+    margin: 0;
+    font-style: italic;
+    font-size: 35px;
+    margin-bottom: 30px;
+    font-family: 'Segoe UI', Tahoma, Verdana, sans-serif;
+}
+
+.attendance2-page .titles h2 {
+    margin: 5px 0 25px 0;
+    font-size: 26px;
+}
+
+/* GO BACK BUTTON */
+.attendance2-page .go-back {
+    background-color: #f7a533;
+    border: none;
+    padding: 12px 22px;
+    border-radius: 20px;
+    font-size: 17px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 30px;
+    transition: 0.2s;
+}
+
+.attendance2-page .go-back:hover {
+    background-color: #f7b45b;
+    transform: scale(1.08);
+}
+
+/* OUTER BOX */
+.attendance2-page .box {
+    margin-top: 5px;
+    border: 2px solid #555;
+    padding: 25px;
+    border-radius: 14px;
+}
+
+/* INPUT ROW */
+.attendance2-page .input-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 18px;
+    margin-bottom: 20px;
+}
+
+.attendance2-page .input-row input {
+    width: 32%;
+    padding: 6px;
+    border: 1px solid #999;
+    border-radius: 4px;
+    outline: none;
+}
+
+.attendance2-page .ylab {
+    margin-left: 145px;
+}
+
+/* BUTTON ROW */
+.attendance2-page .button-row {
+    display: flex;
+    justify-content: left;
+    gap: 25px;
+    margin-bottom: 20px;
+}
+
+.attendance2-page .btn {
+    background: #f7a533;
+    border: none;
+    padding: 12px 32px;
+    border-radius: 22px;
+    font-size: 17px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.attendance2-page .btn:hover {
+    background-color: #f7b45b;
+    transform: scale(1.08);
+}
+
+/* TABLE */
+.attendance2-page table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 17px;
+}
+
+.attendance2-page table th,
+.attendance2-page table td {
+    border: 1px solid #666;
+    padding: 12px;
+}
+
+.attendance2-page table th {
+    background: #f1f1f1;
+}
+
+.attendance2-page td:nth-child(3),
+.attendance2-page td:nth-child(4) {
+    text-align: center;
+    font-size: 19px;
+}
+
+ /* ================================================================
+   ATTENDANCE 3 PAGE — BS CHEM (SCOPED)
+   ================================================================ */
+
+.attendance3-page {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #c8c8ce;
+}
+
+/* MAIN LAYOUT */
+.attendance3-page .container {
+    display: flex;
+    height: 100vh;
+}
+
+/* LEFT PANEL */
+.attendance3-page .left-panel {
+    width: 15.1%;
+    background-color: #234b9b;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 5px;
+    padding-top: 20px;
+}
+
+.attendance3-page .left-panel img {
+    width: 150px;
+    height: auto;
+}
+
+/* RIGHT CONTENT */
+.attendance3-page .right-content {
+    width: 78%;
+    padding: 40px 50px;
+}
+
+/* TOP BAR */
+.attendance3-page .top-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.attendance3-page .titles h1 {
+    margin: 0;
+    font-style: italic;
+    font-size: 35px;
+    margin-bottom: 30px;
+    font-family: 'Segoe UI', Tahoma, Verdana, sans-serif;
+}
+
+.attendance3-page .titles h2 {
+    margin: 5px 0 25px 0;
+    font-size: 26px;
+}
+
+/* GO BACK BUTTON */
+.attendance3-page .go-back {
+    background-color: #f7a533;
+    border: none;
+    padding: 12px 22px;
+    border-radius: 20px;
+    font-size: 17px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 30px;
+    transition: 0.2s;
+}
+
+.attendance3-page .go-back:hover {
+    background-color: #f7b45b;
+    transform: scale(1.08);
+}
+
+/* OUTER BOX */
+.attendance3-page .box {
+    margin-top: 5px;
+    border: 2px solid #555;
+    padding: 25px;
+    border-radius: 14px;
+}
+
+/* INPUT ROW */
+.attendance3-page .input-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 18px;
+    margin-bottom: 20px;
+}
+
+.attendance3-page .input-row input {
+    width: 32%;
+    padding: 6px;
+    border: 1px solid #999;
+    border-radius: 4px;
+    outline: none;
+}
+
+.attendance3-page .ylab {
+    margin-left: 145px;
+}
+
+/* BUTTON ROW */
+.attendance3-page .button-row {
+    display: flex;
+    justify-content: left;
+    gap: 25px;
+    margin-bottom: 20px;
+}
+
+.attendance3-page .btn {
+    background: #f7a533;
+    border: none;
+    padding: 12px 32px;
+    border-radius: 22px;
+    font-size: 17px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.attendance3-page .btn:hover {
+    background-color: #f7b45b;
+    transform: scale(1.08);
+}
+
+/* TABLE */
+.attendance3-page table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 17px;
+}
+
+.attendance3-page table th,
+.attendance3-page table td {
+    border: 1px solid #666;
+    padding: 12px;
+}
+
+.attendance3-page table th {
+    background: #f1f1f1;
+}
+
+.attendance3-page td:nth-child(3),
+.attendance3-page td:nth-child(4) {
+    text-align: center;
+    font-size: 19px;
+}
+
+ /* ================================================================
+   ATTENDANCE 4 PAGE — BS MATH (SCOPED)
+   ================================================================ */
+
+.attendance4-page {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #c8c8ce;
+}
+
+/* MAIN LAYOUT */
+.attendance4-page .container {
+    display: flex;
+    height: 100vh;
+}
+
+/* LEFT PANEL */
+.attendance4-page .left-panel {
+    width: 15.1%;
+    background-color: #234b9b;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 5px;
+    padding-top: 20px;
+}
+
+.attendance4-page .left-panel img {
+    width: 150px;
+    height: auto;
+}
+
+/* RIGHT CONTENT */
+.attendance4-page .right-content {
+    width: 78%;
+    padding: 40px 50px;
+}
+
+/* TOP BAR */
+.attendance4-page .top-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.attendance4-page .titles h1 {
+    margin: 0;
+    font-style: italic;
+    font-size: 35px;
+    margin-bottom: 30px;
+    font-family: 'Segoe UI', Tahoma, Verdana, sans-serif;
+}
+
+.attendance4-page .titles h2 {
+    margin: 5px 0 25px 0;
+    font-size: 26px;
+}
+
+/* GO BACK BUTTON */
+.attendance4-page .go-back {
+    background-color: #f7a533;
+    border: none;
+    padding: 12px 22px;
+    border-radius: 20px;
+    font-size: 17px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 30px;
+    transition: 0.2s;
+}
+
+.attendance4-page .go-back:hover {
+    background-color: #f7b45b;
+    transform: scale(1.08);
+}
+
+/* OUTER BOX */
+.attendance4-page .box {
+    margin-top: 5px;
+    border: 2px solid #555;
+    padding: 25px;
+    border-radius: 14px;
+}
+
+/* INPUT ROW */
+.attendance4-page .input-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 18px;
+    margin-bottom: 20px;
+}
+
+.attendance4-page .input-row input {
+    width: 32%;
+    padding: 6px;
+    border: 1px solid #999;
+    border-radius: 4px;
+    outline: none;
+}
+
+.attendance4-page .ylab {
+    margin-left: 145px;
+}
+
+/* BUTTON ROW */
+.attendance4-page .button-row {
+    display: flex;
+    justify-content: left;
+    gap: 25px;
+    margin-bottom: 20px;
+}
+
+.attendance4-page .btn {
+    background: #f7a533;
+    border: none;
+    padding: 12px 32px;
+    border-radius: 22px;
+    font-size: 17px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.attendance4-page .btn:hover {
+    background-color: #f7b45b;
+    transform: scale(1.08);
+}
+
+/* TABLE */
+.attendance4-page table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 17px;
+}
+
+.attendance4-page table th,
+.attendance4-page table td {
+    border: 1px solid #666;
+    padding: 12px;
+}
+
+.attendance4-page table th {
+    background: #f1f1f1;
+}
+
+.attendance4-page td:nth-child(3),
+.attendance4-page td:nth-child(4) {
+    text-align: center;
+    font-size: 19px;
+}
+
+ /* ================================================================
+   ATTENDANCE 5 PAGE — BS MARINE BIO (SCOPED)
+   ================================================================ */
+
+.attendance5-page {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #c8c8ce;
+}
+
+/* MAIN LAYOUT */
+.attendance5-page .container {
+    display: flex;
+    height: 100vh;
+}
+
+/* LEFT PANEL */
+.attendance5-page .left-panel {
+    width: 15.1%;
+    background-color: #234b9b;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 5px;
+    padding-top: 20px;
+}
+
+.attendance5-page .left-panel img {
+    width: 150px;
+    height: auto;
+}
+
+/* RIGHT CONTENT */
+.attendance5-page .right-content {
+    width: 78%;
+    padding: 40px 50px;
+}
+
+/* TOP BAR */
+.attendance5-page .top-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.attendance5-page .titles h1 {
+    margin: 0;
+    font-style: italic;
+    font-size: 35px;
+    margin-bottom: 30px;
+    font-family: 'Segoe UI', Tahoma, Verdana, sans-serif;
+}
+
+.attendance5-page .titles h2 {
+    margin: 5px 0 25px 0;
+    font-size: 26px;
+}
+
+/* GO BACK BUTTON */
+.attendance5-page .go-back {
+    background-color: #f7a533;
+    border: none;
+    padding: 12px 22px;
+    border-radius: 20px;
+    font-size: 17px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 30px;
+    transition: 0.2s;
+}
+
+/* OUTER BOX */
+.attendance5-page .box {
+    margin-top: 5px;
+    border: 2px solid #555;
+    padding: 25px;
+    border-radius: 14px;
+}
+
+/* INPUT ROW */
+.attendance5-page .input-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 18px;
+    margin-bottom: 20px;
+}
+
+.attendance5-page .input-row input {
+    width: 32%;
+    padding: 6px;
+    border: 1px solid #999;
+    border-radius: 4px;
+    outline: none;
+}
+
+.attendance5-page .ylab {
+    margin-left: 145px;
+}
+
+/* BUTTON ROW */
+.attendance5-page .button-row {
+    display: flex;
+    justify-content: left;
+    gap: 25px;
+    margin-bottom: 20px;
+}
+
+.attendance5-page .btn {
+    background: #f7a533;
+    border: none;
+    padding: 12px 32px;
+    border-radius: 22px;
+    font-size: 17px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.attendance5-page .btn:hover,
+.attendance5-page .go-back:hover {
+    background-color: #f7b45b;
+    transform: scale(1.08);
+}
+
+/* TABLE */
+.attendance5-page table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 17px;
+}
+
+.attendance5-page table th,
+.attendance5-page table td {
+    border: 1px solid #666;
+    padding: 12px;
+}
+
+.attendance5-page table th {
+    background: #f1f1f1;
+}
+
+.attendance5-page td:nth-child(3),
+.attendance5-page td:nth-child(4) {
+    text-align: center;
+    font-size: 19px;
+}
+
+ /* ================================================================
+   ATTENDANCE6 PAGE (SCOPED CSS)
+   ================================================================ */
+
+.attendance6-page {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #c8c8ce;
+}
+
+/* MAIN LAYOUT */
+.attendance6-page .container {
+    display: flex;
+    height: 100vh;
+}
+
+/* LEFT PANEL */
+.attendance6-page .left-panel {
+    width: 15.1%;
+    background-color: #234b9b;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 5px;
+    padding-top: 20px;
+}
+
+.attendance6-page .left-panel img {
+    width: 150px;
+    height: auto;
+}
+
+/* RIGHT CONTENT SECTION */
+.attendance6-page .right-content {
+    width: 78%;
+    padding: 40px 50px;
+}
+
+/* TITLE BAR */
+.attendance6-page .top-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.attendance6-page .titles h1 {
+    margin: 0;
+    text-align: left;
+    font-style: italic;
+    font-size: 35px;
+    margin-bottom: 30px;
+    font-family: 'Segoe UI', Tahoma, Verdana, sans-serif;
+}
+
+.attendance6-page .titles h2 {
+    margin: 5px 0 25px 0;
+    font-size: 26px;
+}
+
+/* GO BACK BUTTON */
+.attendance6-page .go-back {
+    background-color: #f7a533;
+    border: none;
+    padding: 12px 22px;
+    border-radius: 20px;
+    font-size: 17px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 30px;
+    transition: 0.2s;
+}
+
+/* INPUT BOX WRAPPER */
+.attendance6-page .box {
+    margin-top: 5px;
+    border: 2px solid #555;
+    padding: 25px;
+    border-radius: 14px;
+}
+
+/* INPUT ROW */
+.attendance6-page .input-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 18px;
+    margin-bottom: 20px;
+}
+
+.attendance6-page .input-row input {
+    width: 32%;
+    padding: 6px;
+    border: 1px solid #999;
+    border-radius: 4px;
+    outline: none;
+}
+
+.attendance6-page .ylab {
+    margin-left: 145px;
+}
+
+/* BUTTON ROW */
+.attendance6-page .button-row {
+    display: flex;
+    justify-content: left;
+    gap: 25px;
+    margin-bottom: 20px;
+}
+
+.attendance6-page .btn {
+    background: #f7a533;
+    border: none;
+    padding: 12px 32px;
+    border-radius: 22px;
+    font-size: 17px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.attendance6-page .btn:hover,
+.attendance6-page .go-back:hover {
+    background-color: #f7b45b;
+    transform: scale(1.08);
+}
+
+/* TABLE */
+.attendance6-page table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 17px;
+}
+
+.attendance6-page table th,
+.attendance6-page table td {
+    border: 1px solid #666;
+    padding: 12px;
+}
+
+.attendance6-page table th {
+    background: #f1f1f1;
+}
+
+.attendance6-page td:nth-child(3),
+.attendance6-page td:nth-child(4) {
+    text-align: center;
+    font-size: 19px;
+}
+
+ /* =====================================================================
+   COURSE CHOICES PAGE (SCOPED WITH .course-choices-page)
+   ===================================================================== */
+
+.course-choices-page {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #c8c8ce;
+}
+
+/* PAGE LAYOUT */
+.course-choices-page .container {
+    display: flex;
+    height: 100vh;
+}
+
+/* LEFT LOGO PANEL */
+.course-choices-page .left-panel {
+    width: 15%;
+    background-color: #234b9b;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 5px;
+    padding-top: 20px;
+}
+
+.course-choices-page .left-panel img {
+    width: 150px;
+    height: auto;
+}
+
+/* MAIN CONTENT */
+.course-choices-page .main-content {
+    width: 85%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow: hidden;
+}
+
+/* PAGE TITLE */
+.course-choices-page .page-title {
+    width: 96%;
+    text-align: left;
+    font-style: italic;
+    font-size: 35px;
+    margin-top: 35px;
+    margin-bottom: 30px;
+    margin-left: 50px;
+    font-family: 'Segoe UI', Tahoma, Verdana, sans-serif;
+}
+
+/* BUTTON MENU STACK */
+.course-choices-page .menu {
+    display: flex;
+    flex-direction: column;
+    width: 55%;
+    gap: 20px;
+    align-items: center;
+}
+
+/* COURSE BUTTONS */
+.course-choices-page .course-btn {
+    background: #7a97b8;
+    color: #fff;
+    text-decoration: none;
+    padding: 18px;
+    text-align: center;
+    font-size: 20px;
+    border-radius: 40px;
+    width: 70%;
+    transition: 0.2s ease;
+}
+
+.course-choices-page .course-btn:hover {
+    opacity: 0.9;
+}
+
+/* BACK BUTTON */
+.course-choices-page .btn-orange {
+    background: #f6a440;
+    padding: 14px 40px;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 30px;
+    font-size: 20px;
+    transition: 0.3s ease;
+}
+
+.course-choices-page .btn-orange:hover {
+    background-color: #ffab43;
+    transform: scale(1.05);
+    cursor: pointer;
+}
+
+ /* =====================================================================
+   CREATE ADMIN ACCOUNT PAGE (SCOPED WITH .create-admin-page)
+   ===================================================================== */
+
+.create-admin-page {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #c8c8ce;
+}
+
+/* Layout */
+.create-admin-page .container {
+    display: flex;
+    height: 100vh;
+}
+
+/* Left Panel */
+.create-admin-page .left-panel {
+    width: 15%;
+    background-color: #234b9b;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 5px;
+    padding-top: 20px;
+}
+
+.create-admin-page .left-panel img {
+    width: 150px;
+    height: auto;
+}
+
+/* Right Panel & Title */
+.create-admin-page .right-panel h1 {
+    text-align: left;
+    font-style: italic;
+    font-size: 35px;
+    margin-top: 35px;
+    margin-bottom: 30px;
+    margin-left: 50px;
+    font-family: 'Segoe UI', Tahoma, Verdana, sans-serif;
+}
+
+/* Form Box */
+.create-admin-page .form-box {
+    background-color: #e78917;
+    padding: 50px;
+    width: 550px;
+    border-radius: 25px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-left: 250px;
+}
+
+/* Icon Circle */
+.create-admin-page .icon-circle {
+    width: 70px;
+    height: 70px;
+    background-color: #f6b33c;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 30px;
+}
+
+.create-admin-page .icon-circle img {
+    width: 50px;
+    filter: brightness(0) invert(1);
+}
+
+/* Form Fields */
+.create-admin-page .form-group {
+    display: flex;
+    align-items: center;
+    margin-bottom: 18px;
+}
+
+.create-admin-page label {
+    font-size: 18px;
+    width: 180px;
+}
+
+.create-admin-page input[type="text"],
+.create-admin-page input[type="password"] {
+    width: 260px;
+    padding: 10px;
+    border-radius: 5px;
+    border: none;
+    margin-top: 5px;
+    font-size: 16px;
+    outline: none;
+}
+
+/* Buttons */
+.create-admin-page .btn,
+.create-admin-page .btn1 {
+    padding: 10px;
+    border: none;
+    border-radius: 20px;
+    background-color: white;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 20px;
+    transition: 0.2s ease;
+}
+
+.create-admin-page .btn {
+    width: 180px;
+}
+
+.create-admin-page .btn1 {
+    width: 100px;
+}
+
+.create-admin-page .btn:hover,
+.create-admin-page .btn1:hover {
+    background-color: #f2f2f2d4;
+    transform: scale(1.05);
+}
+
+/* =====================================================================
+   CREATE EVENT PAGE (SCOPED WITH .create-event-page)
+   ===================================================================== */
+
+.create-event-page {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #c8c8ce;
+}
+
+/* Layout */
+.create-event-page .container {
+    display: flex;
+    height: 100vh;
+}
+
+/* Left Panel */
+.create-event-page .left-panel {
+    width: 15%;
+    background-color: #234b9b;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 5px;
+    padding-top: 20px;
+}
+
+.create-event-page .left-panel img {
+    width: 150px;
+    height: auto;
+}
+
+/* Main Content Wrapper */
+.create-event-page .main-content {
+    flex: 1;
+    background-color: #d3d3d8;
+    position: relative;
+    padding-top: 60px;
+}
+
+/* Title */
+.create-event-page .page-title {
+    text-align: left;
+    font-style: italic;
+    font-size: 35px;
+    margin-top: 35px;
+    margin-bottom: 30px;
+    margin-left: 50px;
+    font-family: 'Segoe UI', Tahoma, Verdana, sans-serif;
+}
+
+/* Form Layout */
+.create-event-page .form-wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 40px;
+}
+
+.create-event-page .form-box {
+    width: 380px;
+    background: white;
+    padding: 40px;
+    border-radius: 15px;
+    border: 3px solid #000;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Form Inputs */
+.create-event-page label {
+    font-size: 18px;
+    margin-bottom: 8px;
+}
+
+.create-event-page input {
+    border: none;
+    outline: none;
+    border-bottom: 2px solid black;
+    padding: 8px 0;
+    margin-bottom: 25px;
+    font-size: 16px;
+    background: transparent;
+}
+
+.create-event-page input:focus {
+    border-bottom: 2px solid #000000a1;
+}
+
+/* Buttons */
+.create-event-page .btn {
+    width: 140px;
+    padding: 12px;
+    margin: 8px auto;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 10px;
+    background-color: #f39c1c;
+    transition: 0.2s ease;
+}
+
+.create-event-page .cancel {
+    width: 90px;
+}
+
+.create-event-page .btn:hover {
+    background-color: #ffab43;
+    transform: scale(1.05);
+}
+
+/* =====================================================================
+   DELETE EVENT PAGE (SCOPED WITH .delete-event-page)
+   ===================================================================== */
+
+.delete-event-page {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #c8c8ce;
+}
+
+/* Layout */
+.delete-event-page .container {
+    display: flex;
+    height: 100vh;
+}
+
+/* Left Panel */
+.delete-event-page .left-panel {
+    width: 15%;
+    background-color: #234b9b;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 5px;
+    padding-top: 20px;
+}
+
+.delete-event-page .left-panel img {
+    width: 150px;
+    height: auto;
+}
+
+/* Main Content */
+.delete-event-page .main {
+    flex: 1;
+    background: #EEF0FA;
+    padding: 30px;
+}
+
+/* Title */
+.delete-event-page h1 {
+    font-size: 40px;
+    margin-top: 30px;
+    margin-bottom: 50px;
+}
+
+/* Navigation Buttons */
+.delete-event-page .buttons {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 80px;
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+.delete-event-page .buttons button {
+    width: 200px;
+    height: 45px;
+    background: #6C85D7;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 20px;
+    transition: 0.2s ease;
+}
+
+.delete-event-page .buttons button:hover {
+    background-color: #6f4af5;
+    transform: scale(1.05);
+}
+
+/* Logout Button */
+.delete-event-page .logout {
+    float: right;
+    width: 12%;
+    background: #f89d2a;
+    border: none;
+    border-radius: 20px;
+    padding: 12px 22px; 
+    color: #000;
+    font-size: 16px;
+    margin-top: 30px;
+    cursor: pointer;
+    margin-right: 40px;
+}
+
+/* Event Box */
+.delete-event-page .event-box {
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+    width: 90%;
+    border: 2px solid #000;
+    margin-top: 30px;
+    position: relative;
+    min-height: 250px;
+}
+
+.delete-event-page .event-box h2 {
+    margin-top: -10px;
+}
+
+/* Event List */
+.delete-event-page .event-list {
+    list-style: none;
+    padding-left: 0;
+    font-size: 20px;
+}
+
+.delete-event-page .event-list li {
+    margin: 10px 0;
+}
+
+/* Delete Button (small) */
+.delete-event-page .delete-small {
+    background-color: #cac4cf93;
+    padding: 5px 12px;
+    border-radius: 6px;
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+/* Optional: special styling for main delete area */
+.delete-event-page .delete-main {
+    background-color: #25528c;
+    color: white;
+}
+
+/* =====================================================================
+   DASHBOARD PAGE (SCOPED WITH .event-dashboard)
+   ===================================================================== */
+
+.event-dashboard {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #c8c8ce;
+}
+
+/* Layout */
+.event-dashboard .container {
+    display: flex;
+    height: 100vh;
+}
+
+/* Left Panel */
+.event-dashboard .left-panel {
+    width: 15%;
+    background-color: #234b9b;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 5px;
+    padding-top: 20px;
+}
+
+.event-dashboard .left-panel img {
+    width: 150px;
+    height: auto;
+}
+
+/* Main Section */
+.event-dashboard .main {
+    flex: 1;
+    background: #EEF0FA;
+    padding: 30px;
+}
+
+/* Header */
+.event-dashboard h1 {
+    font-size: 40px;
+    margin-top: 30px;
+    margin-bottom: 50px;
+}
+
+/* Buttons */
+.event-dashboard .buttons {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 80px;
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+.event-dashboard .buttons button {
+    width: 200px;
+    height: 45px;
+    background: #6C85D7;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 20px;
+    transition: 0.2s ease;
+}
+
+.event-dashboard .buttons button:hover {
+    background-color: #6f4af5;
+    transform: scale(1.05);
+}
+
+/* Logout Button */
+.event-dashboard .logout {
+    float: right;
+    width: 12%;
+    background: #f89d2a;
+    border: none;
+    border-radius: 20px;
+    padding: 12px 22px; 
+    color: #000;
+    font-size: 16px;
+    margin-top: 30px;
+    cursor: pointer;
+    margin-right: 40px;
+}
+
+/* Event Box */
+.event-dashboard .event-box {
+    background: white;
+    padding: 60px;
+    border-radius: 12px;
+    width: 85%;
+    border: 2px solid #000;
+    margin-top: 30px;
+}
+
+.event-dashboard .event-box h2 {
+    margin-top: -10px;
+}
+
+.event-dashboard ol {
+    font-size: 18px;
+}
+
+/* RESET */
+.export-event-page {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #c8c8ce;
+}
+
+html, body {
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+}
+
+/* MAIN LAYOUT */
+.container {
+    display: flex;
+    height: 100vh;
+}
+
+/* LEFT PANEL */
+.left-panel {
+    width: 15%;
+    background-color: #234b9b;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 5px;
+    padding-top: 20px;
+}
+
+.left-panel img {
+    width: 150px;
+    height: auto;
+}
+
+/* MAIN CONTENT */
+.main {
+    flex: 1;
+    background: #EEF0FA;
+    padding: 30px;
+    overflow-y: auto;
+}
+
+h1 {
+    font-size: 40px;
+    margin-top: 30px;
+    margin-bottom: 50px;
+}
+
+/* TOP BUTTONS */
+.buttons {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 80px;
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+.buttons button {
+    width: 200px;
+    height: 45px;
+    background: #6C85D7;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 20px;
+}
+
+.buttons button:hover {
+    background-color: #6f4af5;
+    transform: scale(1.05);
+    transition: 0.2s;
+}
+
+/* LOGOUT BUTTON */
+.logout {
+    float: right;
+    width: 12%;
+    background: #f89d2a;
+    border: none;
+    border-radius: 20px;
+    padding: 12px 22px;
+    color: rgb(0, 0, 0);
+    font-size: 16px;
+    margin-top: 30px;
+    cursor: pointer;
+    margin-right: 40px;
+}
+
+/* EVENT BOX */
+.event-box {
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+    width: 90%;
+    border: 2px solid #000000;
+    margin-top: 30px;
+    position: relative;
+    min-height: 250px;
+}
+
+.event-box h2 {
+    margin-top: -10px;
+}
+
+/* EVENT LIST */
+.event-list {
+    list-style: none;
+    padding-left: 0;
+    font-size: 20px;
+}
+
+.event-list li {
+    margin: 10px 0;
+}
+
+/* SMALL EXPORT BUTTON */
+.export-small {
+    background-color: #cac4cf93;
+    padding: 5px;
+    border-radius: 6px;
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.export-main {
+    background-color: #25528c;
+    color: white;
+}
+
+/* =======================================
+           FIND EVENT PAGE STYLES
+======================================= */
+
+.find-event-page {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #c8c8ce;
+}
+
+/* MAIN LAYOUT */
+.find-event-page .container {
+    display: flex;
+    height: 100vh;
+}
+
+/* LEFT PANEL */
+.find-event-page .left-panel {
+    width: 15%;
+    background-color: #234b9b;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 5px;
+    padding-top: 20px;
+}
+
+.find-event-page .left-panel img {
+    width: 150px;
+    height: auto;
+}
+
+/* MAIN CONTENT */
+.find-event-page .main {
+    flex: 1;
+    background: #EEF0FA;
+    padding: 30px;
+}
+
+/* HEADER */
+.find-event-page h1 {
+    font-size: 40px;
+    margin-top: 30px;
+    margin-bottom: 50px;
+}
+
+/* NAV BUTTONS */
+.find-event-page .buttons {
+    display: flex;
+    align-items: center;
+    gap: 80px;
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+.find-event-page .buttons button {
+    width: 200px;
+    height: 45px;
+    background: #6C85D7;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 20px;
+}
+
+.find-event-page .buttons button:hover {
+    background-color: #6f4af5;
+    transform: scale(1.05);
+    transition: 0.2s;
+}
+
+/* LOGOUT BUTTON */
+.find-event-page .logout {
+    float: right;
+    width: 12%;
+    background: #f89d2a;
+    border: none;
+    border-radius: 20px;
+    padding: 12px 22px;
+    color: rgb(0, 0, 0);
+    font-size: 16px;
+    margin-top: 30px;
+    cursor: pointer;
+    margin-right: 40px;
+}
+
+/* EVENT BOX */
+.find-event-page .event-box {
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+    width: 90%;
+    border: 2px solid #000000;
+    margin-top: 30px;
+}
+
+.find-event-page .event-box h3 {
+    margin-top: -10px;
+}
+
+/* SEARCH ROW */
+.find-event-page .search-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.find-event-page .search-row input {
+    flex: 1;
+    padding: 10px;
+    border-radius: 6px;
+    border: 1px solid #cedbff;
+    background-color: #b7c7e8;
+}
+
+.find-event-page .search-row .btn {
+    background-color: #cac4cf93;
+    padding: 5px 10px;
+    border-radius: 6px;
+}
+
+/* LIST */
+.find-event-page ol {
+    font-size: 17px;
+    line-height: 1.9em;
+}
+
+/* =============================
+       LOGIN PAGE STYLES
+============================= */
+
+/* RESET + FULL BACKGROUND FIX */
+.login-page-body html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    overflow-x: hidden;
+    font-family: Arial, sans-serif;
+    background: #632bcc;   /* full purple background */
+}
+
+.login-page-body {
+    height: 100%;
+}
+
+
+.login-page {
+    min-height: 100vh;
+    width: 100%;
+    position: relative;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center; 
+    align-items: center;
+}
+
+
+/* TITLE */
+.login-title {
+    font-size: 35px;
+    font-weight: bold;
+    margin-bottom: 80px;
+    color: black;
+    font-family: Georgia, serif;
+    text-align: center;
+}
+
+/* LOGOS */
+.left-logo {
+    position: absolute;
+    width: 140px;
+    top: 20px;   
+    left: 60px;
+}
+
+.right-logo {
+    position: absolute;
+    width: 120px;
+    top: 30px;
+    right: 60px;
+}
+
+/* WHITE LOGIN BOX */
+.login-box2 {
+    width: 350px;
+    background: white;
+    border-radius: 15px;
+    padding: 60px 0 30px;
+    position: relative;
+}
+
+/* ORANGE ICON */
+.login-icon {
+    width: 65px;
+    height: 65px;
+    background: #f89d2a;
+    border-radius: 50%;
+    position: absolute;
+    top: -32px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-icon img {
+    width: 40px;
+}
+
+/* INPUT GROUP */
+.input-group {
+    position: relative;
+    margin: 40px 0 20px;
+}
+
+/* UNDERLINE INPUT */
+.input-group input {
+    width: 65%;
+    border: none;
+    border-bottom: 2px solid #333;
+    outline: none;
+    background: transparent;
+    padding: 2px 0;
+    font-size: 16px;
+    margin-left: 60px;
+}
+
+/* LABEL */
+.input-group label {
+    position: absolute;
+    left: 60px;
+    top: -2px;
+    font-size: 15px;
+    color: #555;
+    transition: 0.25s ease;
+    pointer-events: none;
+}
+
+/* FLOAT LABEL ON FOCUS */
+.input-group input:focus + label,
+.input-group input:valid + label {
+    top: -18px;
+    font-size: 13px;
+    color: black;
+}
+
+/* LOGIN BUTTON */
+.login-btn {
+    width: 30%;
+    background: #f89d2a;
+    border: none;
+    padding: 12px;
+    border-radius: 8px;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-left: 125px;
+}
+
+.login-btn:hover {
+    background-color: #ffab43;
+    transform: scale(1.05);
+    transition: 0.2s;
+}
+
+/* CREATE ACCOUNT LINK */
+.create-link a {
+    font-style: italic;
+    color: white;
+    text-decoration: underline;
+    font-size: 16px;
+    transition: 0.3s ease;
+    display: inline-block;
+    margin-top: 70px;
+}
+
+.create-link a:hover {
+    color: #ac39e2;
+}
+
+ .event-box {
+     position: relative;
+     z-index: 2;
+ }
+
+ #eventList li {
+     cursor: pointer;
+     position: relative;
+     z-index: 3;
+ }
+
+ #eventList li:hover {
+     background: #eef3ff;
+ }
+ .modal {
+     position: fixed;
+     z-index: 9999;
+     pointer-events: auto;
+ }
+
+ .modal * {
+     pointer-events: auto;
+ }

@@ -1,0 +1,104 @@
+<!-- Bantayan, Jatomie Jonalyn C. -->
+
+<!-- This page is used to delete events in the system. It shows a welcome message with the username of the
+logged-in user and provides buttons to move to other pages like creating, finding, deleting, or exporting
+events. The page displays a list of available events with checkboxes so the user can select one or more
+events to delete. When the Delete Event button is clicked, the selected events are sent to the server
+using a POST request. A message is then shown to inform the user whether the deletion was successful or
+not. The page layout is styled using an external CSS file, and simple JavaScript functions are used to
+handle navigation between pages and user logout. -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Delete Event</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="/style.css">
+</head>
+
+<body class="delete-event-page">
+
+<div class="container">
+
+    <div class="left-panel">
+        <img src="/pictures/cs-logo.png" alt="cs-logo" />
+        <img src="/pictures/uep-logo.png" alt="uep-logo" />
+    </div>
+
+    <div class="main">
+        <button class="logout" onclick="logout()">Log out</button>
+
+        <h1 id="welcome"></h1>
+
+        <div class="buttons">
+            <button onclick="goToCreateEvent()">Create New Event</button>
+            <button onclick="goToFindEvent()">Find Event</button>
+            <button onclick="goToDeleteEvent()">Delete Event</button>
+            <button onclick="goToExportEvent()">Export an Event</button>
+        </div>
+
+        <div class="event-box">
+            <h2>Events:</h2>
+
+            <form id="deleteForm">
+                <ul class="event-list" id="eventList"></ul>
+
+                <button class="delete-small" type="submit">Delete event</button>
+                <p id="msg" style="margin-top:10px;"></p>
+            </form>
+        </div>
+    </div>
+
+</div>
+
+<script>
+    /* LOAD EVENTS */
+    fetch("/events/all")
+        .then(res => res.json())
+        .then(events => {
+            const ul = document.getElementById("eventList");
+            if (events.length === 0) {
+                ul.innerHTML = `<p style="margin-left:20px;color:gray;">No events available.</p>`;
+                return;
+            }
+            events.forEach(e => {
+                ul.innerHTML += `
+            <li>
+                <input type="checkbox" value="${e.event_id}">
+                ${e.event_name}
+            </li>`;
+            });
+        });
+
+    /* DELETE EVENTS */
+    document.getElementById("deleteForm").onsubmit = e => {
+        e.preventDefault();
+
+        const ids = [...document.querySelectorAll("input[type=checkbox]:checked")]
+            .map(c => c.value);
+
+        fetch("/events/delete", {
+            method: "POST",
+            headers: {"Content-Type":"application/json"},
+            body: JSON.stringify({ eventIds: ids })
+        })
+            .then(res => res.text())
+            .then(msg => {
+                document.getElementById("msg").innerText = msg;
+                location.reload();
+            });
+    };
+
+    /* NAV */
+    function logout(){ fetch("/logout",{method:"POST"}).then(()=>location.href="/LoginPage.html"); }
+    function goToCreateEvent(){ location.href="/CreateEventPage.html"; }
+    function goToFindEvent(){ location.href="/FindEvent.html"; }
+    function goToDeleteEvent(){ location.href="/DeleteEvent.html"; }
+    function goToExportEvent(){ location.href="/ExportEvent.html"; }
+</script>
+
+</body>
+</html>

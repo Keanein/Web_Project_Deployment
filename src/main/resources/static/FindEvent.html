@@ -1,0 +1,123 @@
+<!-- Bantayan, Jatomie Jonalyn C. -->
+
+<!-- This is the "Find Event" dashboard page for a logged-in user.
+    The page has a left panel showing logos and a main section where the user can interact.
+    It greets the user with their name and has buttons to create, find, delete, or export events.
+    The "Find Event" button opens a popup modal where the user can search for events by name, date, or location.
+    Search results show event details like name, date, time, location, creator, and a link to view attendance.
+    PHP is used to display the user's name and the search results, while JavaScript handles button actions and opening/closing the search popup.
+    If the page is opened without a search, the search popup shows automatically. -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Find Event</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="/style.css">
+</head>
+
+<body class="event-dashboard">
+
+<div class="container">
+
+    <div class="left-panel">
+        <img src="/pictures/cs-logo.png" alt="cs-logo" />
+        <img src="/pictures/uep-logo.png" alt="uep-logo" />
+    </div>
+
+    <div class="main">
+        <button class="logout" onclick="logout()">Log out</button>
+        <h1 id="welcome"></h1>
+
+        <!-- Dashboard Buttons -->
+        <div class="buttons">
+            <button onclick="goToCreateEvent()">Create New Event</button>
+            <button onclick="openSearchModal()">Find Event</button>
+            <button onclick="goToDeleteEvent()">Delete Event</button>
+            <button onclick="goToExportEvent()">Export an Event</button>
+        </div>
+
+        <div style="margin-bottom:20px;">
+            <input type="text" id="searchInput"
+                   placeholder="Search by name, date, or location..."
+                   style="padding:10px; width:60%;">
+
+            <button onclick="search()"
+                    style="padding:10px 20px; margin-left:10px;">
+                Search
+            </button>
+        </div>
+
+
+        <!-- SEARCH RESULTS -->
+        <div class="event-box">
+            <h2>Search Results:</h2>
+            <div id="results">
+                <p style="color:gray;">Search for an event using the Find Event button above.</p>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<script>
+    /* SEARCH */
+    function search(){
+        const q = document.getElementById("searchInput").value.trim();
+        if(!q) return;
+
+        fetch(`/events/search?q=${encodeURIComponent(q)}`)
+            .then(res => res.json())
+            .then(results => {
+                const box = document.getElementById("results");
+                box.innerHTML = "";
+
+                if(results.length === 0){
+                    box.innerHTML = `<p style="color:orange;">No events found for "${q}".</p>`;
+                    return;
+                }
+
+                let ul = document.createElement("ul");
+
+                results.forEach(ev => {
+                    ul.innerHTML += `
+                <li style="margin-bottom:10px;">
+                    <strong>${ev.event_name}</strong><br>
+                    📅 ${ev.event_date}<br>
+                    🕒 ${ev.event_time || "No time"}<br>
+                    📍 ${ev.location || "No location"}<br>
+                    👤 Created by: ${ev.creator || "Unknown"}<br>
+
+                    <a href="/CoursePage.html?event_id=${ev.event_id}"
+                       class="btn"
+                       style="display:inline-block; margin-top:6px;
+                              background:#638BF8; color:white;
+                              padding:6px 14px; border-radius:6px;">
+                       View Attendance
+                    </a>
+                </li>`;
+                });
+
+                box.appendChild(ul);
+                closeSearchModal();
+            });
+    }
+
+    /* NAV */
+    function logout(){
+        fetch("/logout",{method:"POST"})
+            .then(()=>location.href="/LoginPage.html");
+    }
+    function goToCreateEvent(){ location.href="/CreateEventPage.html"; }
+    function goToDeleteEvent(){ location.href="/DeleteEvent.html"; }
+    function goToExportEvent(){ location.href="/ExportEvent.html"; }
+
+    /* AUTO OPEN ON LOAD */
+    window.onload = () => openSearchModal();
+</script>
+
+</body>
+</html>

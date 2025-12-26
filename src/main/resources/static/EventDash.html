@@ -1,0 +1,229 @@
+<!-- Bantayan, Jatomie Jonalyn C. -->
+
+<!-- This is the Event Dashboard page where a logged-in user can manage all their events.
+It shows the username at the top and lists all events from the database.
+The page has buttons to create, find, delete, edit, or export events.
+On the left side, there are logos, and the main area shows the events and buttons.
+Clicking an event goes to a page showing its courses.
+There are pop-up windows (modals) for editing event details and exporting attendance.
+JavaScript is used to open/close these modals, fill the edit form, save changes, and export events.
+PHP is used to display the list of events and their details safely.
+Overall, this page combines HTML for structure, PHP for data, CSS for design, and JavaScript for
+interactive actions. -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Event Dash</title>
+
+
+    <link rel="stylesheet" href="/style.css">
+
+
+    <style>
+        .modal-backdrop{
+            display:none;
+            position:fixed;
+            inset:0;
+            background:rgba(0,0,0,.5);
+            justify-content:center;
+            align-items:center;
+            z-index:9999;
+        }
+        .modal{
+            background:#fff;
+            padding:20px;
+            border-radius:10px;
+            width:420px;
+        }
+    </style>
+</head>
+
+<body class="event-dashboard">
+
+<div class="container">
+
+    <div class="left-panel">
+        <img src="/pictures/cs-logo.png">
+        <img src="/pictures/uep-logo.png">
+    </div>
+
+    <div class="main">
+
+        <button class="logout" onclick="logout()">Log out</button>
+
+        <h1 id="welcome"></h1>
+
+        <div class="buttons">
+            <button onclick="goToCreateEvent()">Create New Event</button>
+            <button onclick="goToFindEvent()">Find Event</button>
+            <button onclick="goToDeleteEvent()">Delete Event</button>
+            <button onclick="openEditSelect()">Edit Event</button>
+            <button onclick="openExportModal()">Export an Event</button>
+        </div>
+
+        <div class="event-box">
+            <h2>Events:</h2>
+            <ol id="eventList"></ol>
+        </div>
+
+    </div>
+</div>
+
+<!-- SELECT EVENT TO EDIT -->
+<div id="editSelectBackdrop" class="modal-backdrop">
+    <div class="modal">
+        <h3>Select Event to Edit</h3>
+
+        <select id="editSelect" class="select-full">
+            <option value="">-- Select Event --</option>
+        </select>
+
+        <div class="modal-footer">
+            <button onclick="closeEditSelect()">Cancel</button>
+            <button onclick="openEditForm()">Edit</button>
+        </div>
+    </div>
+</div>
+
+<!-- EDIT EVENT FORM -->
+<div id="editFormBackdrop" class="modal-backdrop">
+    <div class="modal">
+        <h3>Edit Event</h3>
+
+        <input type="hidden" id="editEventId">
+
+        <label>Name</label>
+        <input id="editName">
+
+        <label>Date</label>
+        <input type="date" id="editDate">
+
+        <label>Time</label>
+        <input type="time" id="editTime">
+
+        <label>Location</label>
+        <input id="editLocation">
+
+        <div class="modal-footer">
+            <button onclick="closeEditForm()">Cancel</button>
+            <button onclick="saveEdit()">Save</button>
+        </div>
+    </div>
+</div>
+
+<!-- EXPORT MODAL -->
+<div id="exportBackdrop" class="modal-backdrop">
+    <div class="modal">
+        <h3>Export Attendance</h3>
+        <select id="exportSelect">
+            <option value="">-- Select Event --</option>
+        </select>
+        <div class="modal-footer">
+            <button onclick="closeExportModal()">Cancel</button>
+            <button onclick="exportNow()">Export</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    /* LOAD EVENTS */
+    fetch("/dashboard/events")
+        .then(res => res.json())
+        .then(events => {
+            const list = document.getElementById("eventList");
+            const editSel = document.getElementById("editSelect");
+            const exportSel = document.getElementById("exportSelect");
+
+            events.forEach(e => {
+                list.innerHTML += `<li style="cursor:pointer"
+                        onclick="openCourses(${e.event_id})">
+                        ${e.event_name}
+                    </li>`;
+
+                editSel.innerHTML += `
+                    <option value="${e.event_id}"
+                        data-name="${e.event_name}"
+                        data-date="${e.event_date || ''}"
+                        data-time="${e.event_time || ''}"
+                        data-location="${e.location || ''}">
+                        ${e.event_name}
+                    </option>`;
+
+                exportSel.innerHTML += `
+                    <option value="${e.event_id}">
+                        ${e.event_name}
+                    </option>`;
+            });
+        });
+
+    function openCourses(id){
+        location.href = `/CoursePage.html?event_id=${id}`;
+    }
+
+    /* NAV */
+    function logout(){
+        fetch("/logout",{method:"POST"})
+            .then(()=>location.href="/LoginPage.html");
+    }
+    function goToCreateEvent(){ location.href="/CreateEventPage.html"; }
+    function goToFindEvent(){ location.href="/FindEvent.html"; }
+    function goToDeleteEvent(){ location.href="/DeleteEvent.html"; }
+
+    /* EDIT */
+    function openEditSelect(){
+        document.getElementById("editSelectBackdrop").style.display="flex";
+    }
+    function closeEditSelect(){
+        document.getElementById("editSelectBackdrop").style.display="none";
+    }
+    function openEditForm(){
+        const s = document.getElementById("editSelect");
+        const o = s.options[s.selectedIndex];
+        if(!o.value){ alert("Select an event"); return; }
+
+        editEventId.value = o.value;
+        editName.value = o.dataset.name;
+        editDate.value = o.dataset.date;
+        editTime.value = o.dataset.time;
+        editLocation.value = o.dataset.location;
+
+        closeEditSelect();
+        document.getElementById("editFormBackdrop").style.display="flex";
+    }
+    function closeEditForm(){
+        document.getElementById("editFormBackdrop").style.display="none";
+    }
+    function saveEdit(){
+        fetch("/events/update",{
+            method:"POST",
+            headers:{"Content-Type":"application/json"},
+            body:JSON.stringify({
+                eventId: editEventId.value,
+                eventName: editName.value,
+                eventDate: editDate.value,
+                eventTime: editTime.value,
+                location: editLocation.value
+            })
+        }).then(()=>location.reload());
+    }
+
+    /* EXPORT */
+    function openExportModal(){
+        document.getElementById("exportBackdrop").style.display="flex";
+    }
+    function closeExportModal(){
+        document.getElementById("exportBackdrop").style.display="none";
+    }
+    function exportNow(){
+        const v = exportSelect.value;
+        if(!v){ alert("Select an event"); return; }
+        window.open(`/export?event_id=${v}`,"_blank");
+        closeExportModal();
+    }
+</script>
+
+</body>
+</html>

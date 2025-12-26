@@ -1,0 +1,83 @@
+<!-- Grefiel, Micheree Kian M. -->
+
+<!-- This is a "Create Event" page for a website. The page has two main parts: a left panel and the main content area.
+The left panel shows two logos for branding. The main content area has a title "Create New Event" and a form
+where users can fill in details about a new event, like its name, date, time, and location. All fields are required.
+At the bottom of the form, there are two buttons: one to create the event and submit the form, and another to cancel
+and go back to the event dashboard. The form sends the information to a PHP file called CreateEvent.php.
+The page also links to a CSS file to style everything nicely. -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Create Event Page</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="/style.css">
+</head>
+
+<body class="create-event-page">
+
+<div class="container">
+
+    <div class="left-panel">
+        <img src="/pictures/cs-logo.png" alt="cs-logo" />
+        <img src="/pictures/uep-logo.png" alt="uep-logo" />
+    </div>
+
+    <div class="main-content">
+        <h1 class="page-title">Create New Event</h1>
+
+        <form class="form-wrapper" id="eventForm">
+
+            <div class="form-box">
+
+                <label>Event Name:</label>
+                <input type="text" name="eventName" required>
+
+                <label>Event Date:</label>
+                <input type="date" name="eventDate" required>
+
+                <label>Event Time:</label>
+                <input type="time" name="eventTime" required>
+
+                <label>Location:</label>
+                <input type="text" name="location" required>
+
+                <button class="btn create" type="submit">Create Event</button>
+                <button class="btn cancel" type="button"
+                        onclick="window.location.href='/EventDash.html'">
+                    Cancel
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+</div>
+
+<script>
+    document.getElementById("eventForm").onsubmit = e => {
+        e.preventDefault();
+
+        const f = e.target;
+        fetch("/events/create", {
+            method: "POST",
+            headers: {"Content-Type":"application/json"},
+            body: JSON.stringify({
+                eventName: f.eventName.value,
+                eventDate: f.eventDate.value,
+                eventTime: f.eventTime.value,
+                location:  f.location.value
+            })
+        }).then(() => {
+            window.location.href = "/EventDash.html";
+        });
+    };
+</script>
+
+</body>
+</html>

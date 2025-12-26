@@ -1,0 +1,96 @@
+<!-- Grefiel, Micheree Kian M. -->
+
+<!-- This is a webpage for creating a new admin account. It has two main parts:
+the left side shows logos (CS and UEP), and the right side has the form
+where the user can enter a username, password, and confirm the password.
+There is a "Create Account" button to submit the form and a "Back" button
+to go back to the login page. If there is an error or message from the
+server, it will show below the form in red. The page uses an external
+CSS file for styling and a small JavaScript function to handle the back button. -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Create Admin Account</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="/style.css">
+</head>
+
+<body class="create-admin-page">
+
+<div class="container">
+
+    <div class="left-panel">
+        <img src="/pictures/cs-logo.png" alt="cs-logo" />
+        <img src="/pictures/uep-logo.png" alt="uep-logo" />
+    </div>
+
+    <div class="right-panel">
+        <h1>Create Admin Account</h1>
+
+        <form class="form-box" id="adminForm">
+
+            <div class="icon-circle">
+                <img src="/pictures/user-icon.png" alt="user-icon" />
+            </div>
+
+            <div class="form-group">
+                <label>Username:</label>
+                <input type="text" name="username" required />
+            </div>
+
+            <div class="form-group">
+                <label>Password:</label>
+                <input type="password" name="password" required />
+            </div>
+
+            <div class="form-group">
+                <label>Confirm Password:</label>
+                <input type="password" name="confirm" required />
+            </div>
+
+            <button class="btn" type="submit">Create Account</button>
+            <button class="btn1" type="button" onclick="goBack()">Back</button>
+
+            <p id="msg" style="color:red; text-align:center; margin-top:10px;"></p>
+        </form>
+
+    </div>
+</div>
+
+<script>
+    function goBack() {
+        window.location.href = "/LoginPage.html";
+    }
+
+    /* CREATE ADMIN */
+    document.getElementById("adminForm").onsubmit = e => {
+        e.preventDefault();
+
+        const f = e.target;
+        fetch("/admin/create", {
+            method: "POST",
+            headers: {"Content-Type":"application/json"},
+            body: JSON.stringify({
+                username: f.username.value,
+                password: f.password.value,
+                confirm:  f.confirm.value
+            })
+        })
+            .then(res => res.text())
+            .then(msg => {
+                if (msg === "REGISTERED" || msg === "SUCCESS") {
+                    window.location.href = "/LoginPage.html";
+                } else {
+                    document.getElementById("msg").innerText = msg;
+                }
+            });
+    };
+</script>
+
+</body>
+</html>
+
