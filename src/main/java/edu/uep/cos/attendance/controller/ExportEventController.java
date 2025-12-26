@@ -18,15 +18,16 @@ public class ExportEventController {
 
     @GetMapping
     public ResponseEntity<?> export(
-            @RequestParam Integer event_id,
+            @RequestParam("event_id") Integer eventId,
             HttpSession session) throws Exception {
 
         if (session.getAttribute("admin_id") == null) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }
 
-        return service.export(event_id);
+        return service.export(eventId);
     }
 }
+
 
 
