@@ -82,6 +82,23 @@ public class ExportEventRepository {
                 
     """, eventId);
     }
+    public List<Map<String, Object>> exportSingleCsv(int eventId) {
+        return jdbc.queryForList("""
+        SELECT
+            s.student_number AS student_no,
+            CONCAT(s.last_name, ', ', s.first_name) AS full_name,
+            s.year_level,
+            a.status_am,
+            a.status_pm,
+            a.time_in_am,
+            a.time_in_pm
+        FROM attendance a
+        JOIN students s ON s.student_id = a.student_id
+        WHERE a.event_id = ?
+        ORDER BY s.last_name ASC, s.first_name ASC
+    """, eventId);
+    }
+
 
 }
 
