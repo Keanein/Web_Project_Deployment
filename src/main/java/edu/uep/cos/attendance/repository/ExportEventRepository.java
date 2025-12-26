@@ -57,6 +57,26 @@ public class ExportEventRepository {
             ORDER BY s.last_name ASC, s.first_name ASC
         """, eventId, courseId);
     }
+    public List<Map<String,Object>> findStudentsByEvent(int eventId) {
+        return jdbc.queryForList("""
+        SELECT student_number, first_name, last_name, year_level
+        FROM students s
+        JOIN attendance a ON a.student_id = s.student_id
+        WHERE a.event_id = ?
+    """, eventId);
+    }
+
+    public List<Map<String,Object>> findAttendanceByEvent(int eventId) {
+        return jdbc.queryForList("""
+        SELECT s.student_number,
+               a.status_am, a.status_pm,
+               a.time_in_am, a.time_in_pm
+        FROM attendance a
+        JOIN students s ON s.student_id = a.student_id
+        WHERE a.event_id = ?
+    """, eventId);
+    }
+
 }
 
 
